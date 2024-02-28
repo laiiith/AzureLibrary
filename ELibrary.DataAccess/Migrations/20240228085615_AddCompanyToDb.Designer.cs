@@ -4,6 +4,7 @@ using Elibrary.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ELibrary.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240228085615_AddCompanyToDb")]
+    partial class AddCompanyToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,38 +96,6 @@ namespace ELibrary.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Companies");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            City = "Tech City",
-                            Name = "Tech Solution",
-                            PhoneNumber = "77766667999000",
-                            PostalCode = "1212121",
-                            State = "IL",
-                            StreetAddress = "123 Tech St"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            City = "Vid City",
-                            Name = "Vivid Books",
-                            PhoneNumber = "7777999000",
-                            PostalCode = "6666666",
-                            State = "IL",
-                            StreetAddress = "999 Vid St"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            City = "Lala Land",
-                            Name = "Readers Club",
-                            PhoneNumber = "111313131555",
-                            PostalCode = "44443233",
-                            State = "IL",
-                            StreetAddress = "999 Main St"
-                        });
                 });
 
             modelBuilder.Entity("ELibrary.Models.Product", b =>
@@ -477,9 +448,6 @@ namespace ELibrary.DataAccess.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CompanyId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -492,8 +460,6 @@ namespace ELibrary.DataAccess.Migrations
 
                     b.Property<string>("StreetAddress")
                         .HasColumnType("nvarchar(max)");
-
-                    b.HasIndex("CompanyId");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
@@ -558,15 +524,6 @@ namespace ELibrary.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ELibrary.Models.ApplicationUser", b =>
-                {
-                    b.HasOne("ELibrary.Models.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId");
-
-                    b.Navigation("Company");
                 });
 #pragma warning restore 612, 618
         }

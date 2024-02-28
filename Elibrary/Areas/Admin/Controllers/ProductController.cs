@@ -1,12 +1,15 @@
-﻿using ELibrary.DataAccess.Repository.IRepository;
+﻿using Elibrary.Utility;
+using ELibrary.DataAccess.Repository.IRepository;
 using ELibrary.Models;
 using ELibrary.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Elibrary.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

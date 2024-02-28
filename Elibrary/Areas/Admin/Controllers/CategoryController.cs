@@ -1,11 +1,14 @@
 ﻿using Elibrary.Data;
+using Elibrary.Utility;
 using ELibrary.DataAccess.Repository.IRepository;
 using ELibrary.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Elibrary.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
