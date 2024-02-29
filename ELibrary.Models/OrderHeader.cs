@@ -22,6 +22,7 @@ namespace ELibrary.Models
         public string? OrderStatus { get; set; }
         public string? PaymentStatus { get; set; }
         public string? TrackingNumber { get; set; }
+        public string? sessionId { get; set; }
         public string? Carrier { get; set; }
         public string? PaymentIntentId { get; set; }
         public DateTime PaymentDate { get; set; }
