@@ -147,7 +147,7 @@ namespace Elibrary_Web.Areas.Customer.Controllers
             }
             if (applicationUser.CompanyId.GetValueOrDefault() == 0)
             {
-                var domain = "https://localhost:7075/";
+                var domain = "https://localhost:7217/";
                 var options = new Stripe.Checkout.SessionCreateOptions
                 {
                     SuccessUrl = domain + $"Customer/cart/OrderConfirmation?id={ShoppingCartVM.OrderHeader.Id}",
