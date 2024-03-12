@@ -43,6 +43,7 @@ namespace ELibrary.Models
         [ValidateNever]
         public Category Category { get; set; }
         [ValidateNever]
+        [Required]
         public string ImageUrl { get; set; }
     }
 }

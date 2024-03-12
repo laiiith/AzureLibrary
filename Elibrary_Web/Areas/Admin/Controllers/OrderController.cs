@@ -51,6 +51,10 @@ namespace Elibrary_Web.Areas.Admin.Controllers
 
             return View(orderVM);
         }
+        public IActionResult UpdateOrderDetails()
+        {
+            return View();
+        }
 
         #region API CALLS
         [HttpGet]
