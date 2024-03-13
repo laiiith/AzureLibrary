@@ -2,13 +2,14 @@
 
 <div class="container row pt-4">
     <div class="col-12 text-center">
-        <h1 class="text-primary text-center">Order Placed Successfully!</h1>
+        <h1 class="text-primary text-center">Payment Successful!</h1>
         Your Order Number Is : @Model <br /><br />
         <span style="font-size: 80px;" class="text-success"><i class="bi bi-check-circle"></i></i></span>
     </div>
     <div class="col-12 text-center" style="color:maroon">
-        <br />
-        Your order has been placed succuessfully!<br />
+        <br />Payment has been applied succuessful!<br />
+        <a asp-area="Admin" asp-controller="Order" asp-action="Details" asp-route-orderId="@Model" class="btn btn-primary mt-3">Back To Order Details</a>
+
     </div>
 </div>
 

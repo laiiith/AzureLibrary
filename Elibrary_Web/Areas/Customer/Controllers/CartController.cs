@@ -66,10 +66,12 @@ namespace Elibrary_Web.Areas.Customer.Controllers
         }
         public IActionResult Remove(int cartId)
         {
-            var cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.Id == cartId);
+            var cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.Id == cartId , tracked:true);
 
+            HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(U => U.ApplicationUserId == cartFromDb.ApplicationUserId).Count() - 1 );
             _unitOfWork.ShoppingCart.Remove(cartFromDb);
             _unitOfWork.Save();
+            TempData["Success"] = "Deleted Successfully";
             return RedirectToAction(nameof(Index));
         }
         public IActionResult Summary()
