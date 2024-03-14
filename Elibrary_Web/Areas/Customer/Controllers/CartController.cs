@@ -150,12 +150,12 @@ namespace Elibrary_Web.Areas.Customer.Controllers
             }
             if (applicationUser.CompanyId.GetValueOrDefault() == 0)
             {
-                var domain = "https://localhost:7217/";
-                var options = new Stripe.Checkout.SessionCreateOptions
+                var domain = Request.Scheme + "://" + Request.Host.Value + "/";
+                var options = new SessionCreateOptions
                 {
                     SuccessUrl = domain + $"Customer/cart/OrderConfirmation?id={ShoppingCartVM.OrderHeader.Id}",
                     CancelUrl = domain + "Customer/cart/Index",
-                    LineItems = new List<Stripe.Checkout.SessionLineItemOptions>(),
+                    LineItems = new List<SessionLineItemOptions>(),
                     Mode = "payment"
                 };
                 foreach (var item in ShoppingCartVM.ShoppingCartList)
