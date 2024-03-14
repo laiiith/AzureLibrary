@@ -1,0 +1,71 @@
+﻿@model RoleManagmentVM
+@{
+    var companyVisible = "display:none;";
+}
+<div class="card shadow border-0  my-5">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Manage User Role</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <input asp-for="ApplicationUser.Id" hidden />
+            <div class="row">
+                <div class="col-10">
+                    <div class="p-3 mt-4">
+
+                        <div class="row mb-3 p-1">
+                            <label asp-for="@Model.ApplicationUser.Name" class="p-0"></label>
+                            <input asp-for="@Model.ApplicationUser.Name" class="form-control" />
+                            <span asp-validation-for="@Model.ApplicationUser.Name" class="text-danger"></span>
+                        </div>
+                        <div class="row mb-3 p-1">
+                            <select asp-for="ApplicationUser.Role" asp-items="@Model.RoleList" class="form-select">
+                            </select>
+                        </div>
+                        @if(Model.ApplicationUser.Role == SD.Role_Company)
+                        {
+                            companyVisible = "display:block;";
+                        }
+                        <div class="row mb-3 p-1">
+                            <select asp-for="ApplicationUser.CompanyId" style="@companyVisible" asp-items="@Model.CompanyList" class="form-select">
+                            </select>
+                        </div>
+
+                        <div class="row pt-2">
+                            <div class="col-6 col-md-3">
+                                    <button type="submit" class="btn btn-primary form-control">UPDATE</button>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <a asp-area="admin" asp-controller="user" asp-action="Index" class="btn btnalert-secondary border form-contol">Back To List</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    <script>
+        $(document).ready(function () {
+            $('#ApplicationUser_Role').change(function () {
+                var selection = $('#ApplicationUser_Role Option:Selected').text();
+                if (selection == 'Company') {
+                    $('#ApplicationUser_CompanyId').show();
+                }
+                else {
+                    $('#ApplicationUser_CompanyId').hide();
+                }
+            })
+        })
+    </script>
+
+}
