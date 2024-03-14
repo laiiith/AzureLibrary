@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ELibrary.Models\ELibrary.Models.csproj" />
+    <ProjectReference Include="..\Elibrary.Utility\Elibrary.Utility.csproj" />
   </ItemGroup>
 
 </Project>

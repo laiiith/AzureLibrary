@@ -61,9 +61,6 @@ namespace Elibrary_Web.Areas.Customer.Controllers
                 HttpContext.Session.SetInt32(SD.SessionCart,
                     _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId).Count());
             }
-            TempData["success"] = "Cart Updated Successfully";
-           
-
             return RedirectToAction(nameof(Index));
         }
         public IActionResult Privacy()

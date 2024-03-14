@@ -5,7 +5,8 @@
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-4">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="py-2 text-white">Register</h2>
+                
+                <h2 class="py-2 text-white">@(User.IsInRole(SD.Role_Admin) ? "Register - Admin Portal" : "Register")</h2>
             </div>
         </div>
     </div>
@@ -60,18 +61,19 @@
                         <label class="ms-2 text-muted" asp-for="Input.PhoneNumber">Phone Number</label>
                         <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                     </div>
-                    <div class="form-floating mb-3 col-6">
-                        <select asp-for="Input.Role" class="form-select" asp-items="@Model.Input.RoleList">
-                            <option disabled selected>--Select Role--</option>
-                        </select>
-                    </div>
-
-                    <div class="form-floating mb-3 col-6">
-                        <select asp-for="Input.CompanyId" style="display:none" class="form-select" asp-items="@Model.Input.CompanyList">
-                            <option disabled selected>--Select Company--</option>
-                        </select>
-                    </div>
-
+                    @if (User.IsInRole(SD.Role_Admin))
+                    {
+                        <div class="form-floating mb-3 col-6">
+                            <select asp-for="Input.Role" class="form-select" asp-items="@Model.Input.RoleList">
+                                <option disabled selected>--Select Role--</option>
+                            </select>
+                        </div>
+                        <div class="form-floating mb-3 col-6">
+                            <select asp-for="Input.CompanyId" style="display:none" class="form-select" asp-items="@Model.Input.CompanyList">
+                                <option disabled selected>--Select Company--</option>
+                            </select>
+                        </div>
+                    }
                     <div class="col-12">
                         <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
                     </div>
@@ -89,10 +91,10 @@
         $(document).ready(function () {
             $('#Input_Role').change(function () {
                 var selection = $('#Input_Role Option:Selected').text();
-                if(selection == 'Company'){
+                if (selection == 'Company') {
                     $('#Input_CompanyId').show();
                 }
-                else{
+                else {
                     $('#Input_CompanyId').hide();
                 }
             })
